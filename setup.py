@@ -20,7 +20,9 @@ setup(name=PROJECT,
             'dockerdevice = dockerdevice.main:main'
         ],
         'dockerdevice.client': [
-	    'gpu-list = dockerdevice.gpu:GpuList'
+	    'gpu-list = dockerdevice.gpu:GpuList',
+	    'gpu-remove = dockerdevice.gpu:GpuRemove',
+	    'gpu-add = dockerdevice.gpu:GpuAdd'
         ],
 	},
 
