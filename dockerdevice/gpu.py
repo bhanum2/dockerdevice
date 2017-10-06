@@ -113,13 +113,18 @@ class GpuList(Lister):
        		container_name = container_name[1:]
 
 	        sys_file_path = '/sys/fs/cgroup/devices/docker/' + container_id + '/devices.list'
-       		file_data =  open(sys_file_path, 'r').read().splitlines()
-	        for line in file_data:
- 			if str(major) in line:
-                       		index = line.split()[1].split(':')[1]
-				if index == '255':
-                             		 continue
-	                        dict_containers[index].append(container_name)
+		if os.path.isfile(sys_file_path) == False:
+			# this is not a nvidia docker container
+			continue
 
+       		with  open(sys_file_path, 'r') as file_obj:
+       			file_data =  file_obj.read().splitlines()
+	        for line in file_data:
+ 			if str(major) not in line:
+				continue
+              		index = line.split()[1].split(':')[1]
+			if index == '255':
+                       		 continue
+	                dict_containers[index].append(container_name)
 
 	return (('Index', 'UUID', 'Attached-container' ), ((item, dict_gpu[item], ','.join(dict_containers[str(item)])) for item in dict_gpu ))
