@@ -16,3 +16,15 @@ list Nvidia gpu devices and containers attached to it
 #
 
 ```
+Add gpu device id 2 to running container mygpu
+```
+#dockerdevice gpu-add --gpu 2 --container mygpu
+OK
+#
+```
+Remove gpu device id 2 from a running container mygpu
+```
+#dockerdevice gpu-remove --gpu 2 --container mygpu
+OK
+#
+```
