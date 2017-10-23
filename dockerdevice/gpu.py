@@ -46,7 +46,7 @@ class GpuRemove(Command):
         return parser
 
     def take_action(self, args):
-	docker_obj =docker.from_env()
+        docker_obj = docker.APIClient(base_url='unix://var/run/docker.sock', version='auto')
 	container_obj = docker_obj.inspect_container(args.container)
 	container_id = container_obj['Id']	
 	sys_file_path = '/sys/fs/cgroup/devices/docker/' + container_id + '/devices.deny'
@@ -75,7 +75,7 @@ class GpuAdd(Command):
         return parser
 
     def take_action(self, args):
-	docker_obj =docker.from_env()
+        docker_obj = docker.APIClient(base_url='unix://var/run/docker.sock', version='auto')
 	container_obj = docker_obj.inspect_container(args.container)
 	container_id = container_obj['Id']	
 	sys_file_path = '/sys/fs/cgroup/devices/docker/' + container_id + '/devices.allow'
@@ -103,7 +103,7 @@ class GpuList(Lister):
 	nvmlShutdown()
 
 
-	docker_obj = docker.from_env()
+        docker_obj = docker.APIClient(base_url='unix://var/run/docker.sock', version='auto')
 	containers = docker_obj.containers(all=True)
 	major =get_nvidia_major()
 	dict_containers = collections.defaultdict(list)

@@ -1,1 +1,3 @@
 cliff
+docker
+nvidia-ml-py
