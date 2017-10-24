@@ -19,5 +19,5 @@ volumes:
   nvidia_vol:
     external:
       driver: nvidia-docker
-      name: nvidia_driver_384.66
+      name: nvidia_driver_384.81
     
