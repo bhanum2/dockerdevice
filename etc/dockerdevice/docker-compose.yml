@@ -1,6 +1,7 @@
 version: '2'
 services:
   nvidia-container:
+    container_name: ${container_name}
     build:
       context: .
       dockerfile: Dockerfile
